@@ -1,11 +1,16 @@
 package data;
 
+import utils.Randomizer;
+
+import java.util.Random;
+
 public enum CardText {
 	SAMPLE("Sample Name", "Sample Flavor", "Sample Card Text");
 	
 	// fields
 	private final String name, flavor, text;
 	
+	private static final Random RNG = Randomizer.getRandomizer();
 	
 	// constructors
 	private CardText(String name, String flavor, String text)
@@ -30,4 +35,11 @@ public enum CardText {
 	{
 		return this.text;
 	}
+	
+	public static CardText getRandomCardText()
+	{
+		CardText[] cards = values();
+		return cards[RNG.nextInt(cards.length)];
+	}
+
 }
