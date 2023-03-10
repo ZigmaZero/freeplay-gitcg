@@ -1,16 +1,18 @@
 package logic.card;
 
+import data.CardText;
+
 public abstract class BaseCard {
-	private int cardId;
+	private CardText card;
 	
-	public BaseCard(int cardId)
+	public BaseCard(CardText card)
 	{
-		this.cardId = cardId;
+		this.card = card;
 	}
 	
-	public int getCardId()
+	public CardText getCard()
 	{
-		return cardId;
+		return card;
 	}
 	
 }
