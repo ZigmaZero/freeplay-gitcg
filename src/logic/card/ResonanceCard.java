@@ -11,8 +11,8 @@ public class ResonanceCard extends ActionCard {
 
 	private ElementType resonatingElement;
 	
-	public ResonanceCard(String name, ArrayList<CostType> cost, EffectString effects, ElementType resonatingElement) {
-		super(name, cost, effects);
+	public ResonanceCard(String name, ArrayList<CostType> cost, EffectString effects, int id, ElementType resonatingElement) {
+		super(name, cost, effects, id);
 		this.setCardCategory(logic.enums.CardCategoryType.EVENT);
 		this.setCardSubCategory(logic.enums.CardSubCategoryType.RESONANCE);
 		this.resonatingElement = resonatingElement;

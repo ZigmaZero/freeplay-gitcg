@@ -15,6 +15,7 @@ public class ActionCard {
 	private EffectString effectString;
 	private ArrayList<CostType> cost;
 	//card categories
+	private int id;
 	private CardCategoryType cardCategory;
 	private CardSubCategoryType cardSubCategory;
 	
@@ -37,6 +38,16 @@ public class ActionCard {
 
 	public void setCardSubCategory(CardSubCategoryType cardSubCategory) {
 		this.cardSubCategory = cardSubCategory;
+	}
+	
+	public int getId()
+	{
+		return id;
+	}
+	
+	public void setId(int id)
+	{
+		this.id = id;
 	}
 	
 	public String getName()
@@ -67,7 +78,7 @@ public class ActionCard {
 		this.cost = cost;
 	}
 
-	public ActionCard(String name, ArrayList<CostType> cost, EffectString effects)
+	public ActionCard(String name, ArrayList<CostType> cost, EffectString effects, int id)
 	{
 		this.setName(name);
 		this.setEffectString(effects);
@@ -79,27 +90,16 @@ public class ActionCard {
 		this.setCardSubCategory(null);
 	}
 	
-	public ActionCard(String name, ArrayList<CostType> cost, EffectString effects, CardCategoryType cardCategory)
+	public ActionCard(String name, ArrayList<CostType> cost, EffectString effects, int id, CardCategoryType cardCategory)
 	{
-		this.setName(name);
-		this.setEffectString(effects);
-		if(this.getEffectString().getEffects().get(0).getCondition() != logic.enums.ConditionType.CARD_ACTIVATE)
-			this.getEffectString().getEffects().get(0).setCondition(logic.enums.ConditionType.CARD_ACTIVATE);
-		
-		this.setCost(cost);
+		this(name, cost, effects, id);
 		this.setCardCategory(cardCategory);
 		this.setCardSubCategory(null);
 	}
 	
-	public ActionCard(String name, ArrayList<CostType> cost, EffectString effects, CardCategoryType cardCategory, CardSubCategoryType cardSubCategory)
+	public ActionCard(String name, ArrayList<CostType> cost, EffectString effects, int id, CardCategoryType cardCategory, CardSubCategoryType cardSubCategory)
 	{
-		this.setName(name);
-		this.setEffectString(effects);
-		if(this.getEffectString().getEffects().get(0).getCondition() != logic.enums.ConditionType.CARD_ACTIVATE)
-			this.getEffectString().getEffects().get(0).setCondition(logic.enums.ConditionType.CARD_ACTIVATE);
-		
-		this.setCost(cost);
-		this.setCardCategory(cardCategory);
+		this(name, cost, effects, id, cardCategory);
 		this.setCardSubCategory(cardSubCategory);
 	}
 	

@@ -18,8 +18,8 @@ public class TalentCard extends EquipCard {
 		this.characterName = characterName;
 	}
 
-	public TalentCard(String name, ArrayList<CostType> cost, EffectString effects, String characterName) {
-		super(name, cost, effects);
+	public TalentCard(String name, ArrayList<CostType> cost, EffectString effects, int id, String characterName) {
+		super(name, cost, effects, id);
 		this.setCardSubCategory(logic.enums.CardSubCategoryType.TALENT);
 		this.setCharacterName(characterName);
 	}

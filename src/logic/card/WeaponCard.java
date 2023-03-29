@@ -18,8 +18,8 @@ public class WeaponCard extends EquipCard {
 		this.weaponType = weaponType;
 	}
 
-	public WeaponCard(String name, ArrayList<CostType> cost, EffectString effects, WeaponType weaponType) {
-		super(name, cost, effects);
+	public WeaponCard(String name, ArrayList<CostType> cost, EffectString effects, int id, WeaponType weaponType) {
+		super(name, cost, effects, id);
 		this.setCardSubCategory(logic.enums.CardSubCategoryType.WEAPON);
 		this.setWeaponType(weaponType);
 	}

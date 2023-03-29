@@ -7,8 +7,8 @@ import logic.enums.CostType;
 
 public class ArtifactCard extends EquipCard {
 
-	public ArtifactCard(String name, ArrayList<CostType> cost, EffectString effects) {
-		super(name, cost, effects);
+	public ArtifactCard(String name, ArrayList<CostType> cost, EffectString effects, int id) {
+		super(name, cost, effects, id);
 		this.setCardSubCategory(logic.enums.CardSubCategoryType.ARTIFACT);
 	}
 
