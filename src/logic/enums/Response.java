@@ -1,5 +1,9 @@
 package logic.enums;
 
 public enum Response {
-
+	SUCCESS,
+	ADD_CARD_INVALID,
+	ADD_CARD_FULLDECK,
+	REMOVE_CARD_EMPTYDECK,
+	REMOVE_CARD_NOCARD;
 }

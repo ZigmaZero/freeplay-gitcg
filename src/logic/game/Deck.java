@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import logic.card.ActionCard;
 import logic.card.CharacterCard;
+import logic.enums.Response;
 
 public class Deck {
 	private String deckName;
@@ -47,18 +48,18 @@ public class Deck {
 		this.setActionCards(new ArrayList<ActionCard>());
 	}
 	
-	public boolean addCard(ActionCard card)
+	public Response addCard(ActionCard card)
 	{
 		if(!card.canBeAdded(this))
-			return false;
+			return Response.ADD_CARD_INVALID;
 		
 		if(this.getActionCards().size() == 30)
-			return false;
+			return Response.ADD_CARD_FULLDECK;
 		
 		if(this.getActionCards().size() == 0)
 		{
 			this.getActionCards().add(card);
-			return true;
+			return Response.SUCCESS;
 		}
 		
 		for(int i=0;i<this.getActionCards().size();i++)
@@ -66,28 +67,28 @@ public class Deck {
 			if(this.getActionCards().get(i).getId() > card.getId())
 			{
 				this.getActionCards().add(i, card);
-				return true;
+				return Response.SUCCESS;
 			}
 		}
 		//this card is last on the deck list.
 		this.getActionCards().add(card);
-		return true;
+		return Response.SUCCESS;
 	}
 	
-	public boolean removeCard(ActionCard card)
+	public Response removeCard(ActionCard card)
 	{
 		if(this.getActionCards().size() == 0)
-			return false;
+			return Response.REMOVE_CARD_EMPTYDECK;
 		
 		for(int i=0;i<this.getActionCards().size();i++)
 		{
 			if(this.getActionCards().get(i).getId() == card.getId())
 			{
 				this.getActionCards().remove(i);
-				return true;
+				return Response.SUCCESS;
 			}
 		}
 		//no such card in list.
-		return false;
+		return Response.REMOVE_CARD_EMPTYDECK;
 	}
 }
