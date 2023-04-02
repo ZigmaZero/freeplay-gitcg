@@ -20,6 +20,9 @@ public class GameInstance {
 		Collections.shuffle(opponent.getPlayerDeck().getActionCards());
 		player.draw(5);
 		opponent.draw(5);
+		// TODO hand mulligan
+		// TODO player choose active character
+		// TODO roll dice + reroll dice
 	}
 
 	public Player getPlayer() {
