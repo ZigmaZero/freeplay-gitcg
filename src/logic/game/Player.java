@@ -10,7 +10,7 @@ public class Player {
 	private Deck playerDeck;
 	private ArrayList<ActionCard> playerHand;
 
-	public Player(Deck playerDeck, ArrayList<CharacterCard> playerCharacters) {
+	public Player(Deck playerDeck) {
 		super();
 		setPlayerDeck(playerDeck);
 		playerHand = new ArrayList<>();
