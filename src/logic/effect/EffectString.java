@@ -47,4 +47,14 @@ public class EffectString {
 			}
 		}
 	}
+	
+	public String toString()
+	{
+		String outString = "==EffectString Object==\n";
+		for(int i=0;i<this.getEffects().size();i++)
+		{
+			outString += this.getEffects().get(i).toString() + "\n";
+		}
+		return outString;
+	}
 }

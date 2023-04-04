@@ -107,4 +107,9 @@ public class ActionCard {
 	{
 		this.getEffectString().activate(logic.enums.ConditionType.CARD_ACTIVATE);
 	}
+	
+	public String toString()
+	{
+		return this.getName();
+	}
 }

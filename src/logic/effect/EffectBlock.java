@@ -60,4 +60,9 @@ public class EffectBlock {
 		
 		return true;
 	}
+	
+	public String toString()
+	{
+		return this.getCondition() + " " + this.getEffect();
+	}
 }

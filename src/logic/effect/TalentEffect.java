@@ -52,4 +52,9 @@ public class TalentEffect {
 	{
 		this.getEffectString().activate(logic.enums.ConditionType.TALENT_ACTIVATE);
 	}
+	
+	public String toString()
+	{
+		return this.getName() + "\n" + this.getEffectString().toString();
+	}
 }
