@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import logic.card.ActionCard;
 import logic.card.CharacterCard;
-import logic.enums.Response;
 
 public class Deck {
 	private String deckName;
 	private ArrayList<CharacterCard> characterCards;
 	private ArrayList<ActionCard> actionCards;
+	private PlayArea owner;
 	
 	public String getDeckName() {
 		return deckName;
@@ -41,25 +41,27 @@ public class Deck {
 	}
 
 
-	public Deck()
+	public Deck(PlayArea playArea)
 	{
 		this.setDeckName("My Deck");
 		this.setCharacterCards(new ArrayList<CharacterCard>());
 		this.setActionCards(new ArrayList<ActionCard>());
+		this.owner = playArea;
 	}
 	
-	public Response addCard(ActionCard card)
+	public int addCard(ActionCard card)
 	{
 		if(!card.canBeAdded(this))
-			return Response.ADD_CARD_INVALID;
+			return 1;
 		
 		if(this.getActionCards().size() == 30)
-			return Response.ADD_CARD_FULLDECK;
+			return 1;
 		
 		if(this.getActionCards().size() == 0)
 		{
 			this.getActionCards().add(card);
-			return Response.SUCCESS;
+			card.setOwner(owner);
+			return 0;
 		}
 		
 		for(int i=0;i<this.getActionCards().size();i++)
@@ -67,28 +69,43 @@ public class Deck {
 			if(this.getActionCards().get(i).getId() > card.getId())
 			{
 				this.getActionCards().add(i, card);
-				return Response.SUCCESS;
+				card.setOwner(owner);
+				return 0;
 			}
 		}
 		//this card is last on the deck list.
 		this.getActionCards().add(card);
-		return Response.SUCCESS;
+		card.setOwner(owner);
+		return 0;
 	}
 	
-	public Response removeCard(ActionCard card)
+	public int addCard(CharacterCard card)
+	{
+		if(this.getCharacterCards().size() == 3)
+			return 1;
+		
+		this.getCharacterCards().add(card);
+		card.setOwner(owner);
+		return 0;
+	}
+	
+	public int removeCard(ActionCard card)
 	{
 		if(this.getActionCards().size() == 0)
-			return Response.REMOVE_CARD_EMPTYDECK;
+			return 1;
 		
-		for(int i=0;i<this.getActionCards().size();i++)
-		{
-			if(this.getActionCards().get(i).getId() == card.getId())
-			{
-				this.getActionCards().remove(i);
-				return Response.SUCCESS;
-			}
-		}
-		//no such card in list.
-		return Response.REMOVE_CARD_EMPTYDECK;
+		if(this.getActionCards().remove(card))
+			return 0;
+		return 1;
+	}
+	
+	public int removeCard(CharacterCard card)
+	{
+		if(this.getCharacterCards().size() == 0)
+			return 1;
+		
+		if(this.getCharacterCards().remove(card))
+			return 0;
+		return 1;
 	}
 }

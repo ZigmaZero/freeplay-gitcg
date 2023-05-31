@@ -2,16 +2,18 @@ package logic.card;
 
 import java.util.ArrayList;
 
-import logic.entity.ArtifactEntity;
-import logic.entity.TalentEntity;
-import logic.entity.WeaponEntity;
-import logic.enums.ElementType;
-import logic.enums.FactionType;
-import logic.enums.WeaponType;
+import img.ImageLoader;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import logic.game.Deck;
-import logic.effect.TalentEffect;
+import logic.game.PlayArea;
+import utils.RenderObject;
+import utils.TalentMethod;
+import utils.enums.ElementType;
+import utils.enums.FactionType;
+import utils.enums.WeaponType;
 
-public class CharacterCard {
+public class CharacterCard implements RenderObject {
 	//constant
 	private String characterName;
 	private int maxHp;
@@ -19,15 +21,18 @@ public class CharacterCard {
 	private ElementType characterElement;
 	private WeaponType characterWeaponType;
 	private FactionType characterFaction;
-	private ArrayList<TalentEffect> characterTalents;
+	private int id;
+	private ArrayList<TalentMethod> talents = new ArrayList<TalentMethod>();
 	
 	//dynamic
 	private int currentHp;
 	private int currentEnergy;
-	private WeaponEntity equippedWeapon;
-	private ArtifactEntity equippedArtifact;
-	private TalentEntity equippedTalent;
 	private ElementType affectedByElement;
+	
+	//render parameters
+	private String cardImgFilePath;
+	
+	private PlayArea owner;
 	
 	
 	//getters and setters for everything (why do i do this to myself)
@@ -67,41 +72,26 @@ public class CharacterCard {
 	public void setCharacterFaction(FactionType characterFaction) {
 		this.characterFaction = characterFaction;
 	}
-	public ArrayList<TalentEffect> getCharacterTalents() {
-		return characterTalents;
-	}
-	public void setCharacterTalents(ArrayList<TalentEffect> characterTalents) {
-		this.characterTalents = characterTalents;
-	}
+
 	public int getCurrentHp() {
 		return currentHp;
 	}
 	public void setCurrentHp(int currentHp) {
+		if(currentHp < 0)
+			currentHp = 0;
+		if(currentHp > maxHp)
+			currentHp = maxHp;
 		this.currentHp = currentHp;
 	}
 	public int getCurrentEnergy() {
 		return currentEnergy;
 	}
 	public void setCurrentEnergy(int currentEnergy) {
+		if(currentEnergy < 0)
+			currentEnergy = 0;
+		if(currentEnergy > maxEnergy)
+			currentEnergy = maxEnergy;
 		this.currentEnergy = currentEnergy;
-	}
-	public WeaponEntity getEquippedWeapon() {
-		return equippedWeapon;
-	}
-	public void setEquippedWeapon(WeaponEntity equippedWeapon) {
-		this.equippedWeapon = equippedWeapon;
-	}
-	public ArtifactEntity getEquippedArtifact() {
-		return equippedArtifact;
-	}
-	public void setEquippedArtifact(ArtifactEntity equippedArtifact) {
-		this.equippedArtifact = equippedArtifact;
-	}
-	public TalentEntity getEquippedTalent() {
-		return equippedTalent;
-	}
-	public void setEquippedTalent(TalentEntity equippedTalent) {
-		this.equippedTalent = equippedTalent;
 	}
 	public ElementType getAffectedByElement() {
 		return affectedByElement;
@@ -109,27 +99,35 @@ public class CharacterCard {
 	public void setAffectedByElement(ElementType affectedByElement) {
 		this.affectedByElement = affectedByElement;
 	}
-	
-	public CharacterCard(String characterName, int maxHp, int maxEnergy, ElementType characterElement, WeaponType characterWeaponType, FactionType characterFaction, ArrayList<TalentEffect> characterTalents)
-	{
-		//set statics
-		this.setCharacterName(characterName);
-		this.setMaxHp(maxHp);
-		this.setMaxEnergy(maxEnergy);
-		this.setCharacterElement(characterElement);
-		this.setCharacterWeaponType(characterWeaponType);
-		this.setCharacterFaction(characterFaction);
-		this.setCharacterTalents(characterTalents);
-		
-		//set dynamics to initial
-		this.setCurrentHp(this.getMaxHp());
-		this.setCurrentEnergy(0);
-		this.setEquippedWeapon(null);
-		this.setEquippedArtifact(null);
-		this.setEquippedTalent(null);
-		this.setAffectedByElement(null);
+	public String getCardImgFilePath() {
+		return cardImgFilePath;
+	}
+	public void setCardImgFilePath(String cardImgFilePath) {
+		this.cardImgFilePath = cardImgFilePath;
 	}
 	
+	public int getId()
+	{
+		return this.id;
+	}
+	
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+	
+	public PlayArea getOwner() {
+		return owner;
+	}
+	public void setOwner(PlayArea owner) {
+		this.owner = owner;
+	}
+	public ArrayList<TalentMethod> getTalents() {
+		return talents;
+	}
+	public void setTalents(ArrayList<TalentMethod> talents) {
+		this.talents = talents;
+	}
 	public boolean canBeAdded(Deck deck)
 	{
 		return true;
@@ -138,5 +136,28 @@ public class CharacterCard {
 	public String toString()
 	{
 		return this.getCharacterName();
+	}
+	
+	@Override
+	public Node render() {
+		return new ImageView(ImageLoader.getInstance().getImage(cardImgFilePath));
+	}
+	
+	public boolean isDefeated()
+	{
+		return getCurrentHp() == 0;
+	}
+	
+	public int activate(int talent_number)
+	{
+		return talents.get(talent_number).activate();
+	}
+	
+	public int activate(TalentMethod talent)
+	{
+		if(talents.contains(talent))
+			return talent.activate();
+		else
+			return 1;
 	}
 }

@@ -5,17 +5,27 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import logic.enums.CostType;
-import logic.enums.DiceType;
+import logic.game.GameInstance;
+import utils.enums.CostType;
+import utils.enums.DiceType;
 
 public class CostHandler {
 
 	public static void fulfillCost(ArrayList<CostType> cost, ArrayList<DiceType> dice) {
-
+		ArrayList<DiceType> dicetray = GameInstance.getInstance().getCurrentPlayer().getPlayerDice();
+		//remove dice from the current player's dicetray to fulfill the cost as required.
+		if(isCostPayable(cost, dice) && cost.size() == dice.size())
+		{
+			for(DiceType d:dice)
+			{
+				dicetray.remove(d);
+			}
+		}
 	}
 
 	public static boolean isCostPayable(ArrayList<CostType> cost, ArrayList<DiceType> dicetray) {
-
+		//if the cost can be paid by a selection of dice, or the dicetray itself.
+		
 		if (cost == null || dicetray == null) {
 			// dont know if this will ever happen
 		}

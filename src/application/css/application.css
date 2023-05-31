@@ -1,0 +1,64 @@
+.rootPane {
+	-fx-background-image: url('MainMenu.jpg');
+	-fx-background-size: cover;
+}
+
+.mainButton {
+	-fx-background-color: #4a4d54
+}
+
+.mainButton:hover {
+	-fx-background-color: #62656b;
+}
+
+.backButton {
+	-fx-background-color:  #76332b;
+	-fx-background-radius:  10;
+}
+
+.backButton:hover {
+	-fx-background-color:  #834740;
+	-fx-background-radius:  10;
+}
+
+.startButton {
+	 -fx-background-color: #365f6e;
+	 -fx-background-radius:  10;
+}
+
+.startButton:hover {
+	 -fx-background-color: #5e7e8b;
+	 -fx-background-radius:  10;
+}
+
+.navigationButton {
+	-fx-background-color: #dbd1a8;
+	-fx-background-radius:  10;
+}
+
+.navigationButton:hover {
+	-fx-background-color: #e1d9b6;
+	-fx-background-radius:  10;
+}
+
+.cardBack {
+	-fx-background-image : url('CardBack.png');
+}
+
+.endRoundButton {
+	-fx-background-color: #e4b246;
+	-fx-background-radius:  10;
+}
+
+.endRoundButton:hover {
+	-fx-background-color: #e6b958;
+	-fx-background-radius:  10;
+}
+
+.rewardButton {
+	 -fx-background-color: #475558;
+}
+
+.rewardButton:hover {
+	-fx-background-color: #526366;
+}
