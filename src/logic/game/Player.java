@@ -1,6 +1,5 @@
 package logic.game;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import logic.card.ActionCard;
